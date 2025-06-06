@@ -50,22 +50,56 @@
     }
 
     .slide:first-child h1 {
-      position: absolute;
-      top: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    }
-
-    .slide:first-child p {
-      z-index: 2;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 1rem;
     }
 
     .slide-content {
       flex: 1;
       z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .gift-container {
+      position: relative;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .gift-img {
+      width: 150px;
+      cursor: pointer;
+    }
+
+    .open-btn {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border-radius: 1rem;
+      background: #fff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      animation: float 0.4s ease-in-out 4;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(10px, -10px); }
+      50% { transform: translate(-10px, 10px); }
+      75% { transform: translate(10px, 10px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    .revealed-img {
+      display: none;
+      margin-top: 1rem;
+      width: 180px;
+      border-radius: 1rem;
+      box-shadow: 0 0 30px white;
     }
 
     .slide-image {
@@ -112,7 +146,6 @@
       animation: fly-up 20s linear forwards, flap 1s ease-in-out infinite, shimmer 6s linear infinite;
       filter: drop-shadow(0 0 8px #fff5f5);
       z-index: 9991;
-      will-change: transform;
     }
 
     @keyframes fly-up {
@@ -131,49 +164,6 @@
       50% { filter: hue-rotate(120deg); }
       75% { filter: hue-rotate(180deg); }
       100% { filter: hue-rotate(360deg); }
-    }
-
-    .gift-container {
-      flex: 0 0 250px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 3;
-    }
-
-    .gift-container img {
-      width: 150px;
-      height: auto;
-    }
-
-    #openBtn {
-      margin-top: 10px;
-      padding: 0.5rem 1.5rem;
-      border: none;
-      border-radius: 20px;
-      background: #fff;
-      color: #ff69b4;
-      font-weight: bold;
-      cursor: pointer;
-      animation: moveAround 2s ease-in-out 0s 4 alternate;
-    }
-
-    @keyframes moveAround {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-20px); }
-      50% { transform: translateX(20px); }
-      75% { transform: translateX(-10px); }
-      100% { transform: translateX(0); }
-    }
-
-    #hiddenImage {
-      display: none;
-      margin-top: 1rem;
-      width: 180px;
-      border-radius: 1rem;
-      box-shadow: 0 0 30px 10px rgba(255,255,255,0.6);
     }
 
     #nextBtn {
@@ -197,21 +187,18 @@
   <div id="slides">
     <section class="slide active">
       <div class="slide-content">
-        <p>Wishing you a day full of love, laughter, and magic.</p>
-      </div>
-      <div class="gift-container">
-        <img src="assets/giftbox.png" alt="Gift Box">
-        <button id="openBtn">Open</button>
-        <img id="hiddenImage" src="assets/opened-picture.png" alt="Surprise Image">
+        <h1>Happy Birthday 🎉</h1>
+        <div class="gift-container">
+          <img src="assets/giftbox.png" alt="Gift" class="gift-img" id="giftBox">
+          <button class="open-btn" id="openBtn">Open</button>
+          <img src="assets/gift-photo.png" class="revealed-img" id="revealedImg" alt="Surprise" />
+        </div>
       </div>
       <img src="assets/birthday-collage.png" alt="Birthday Collage" class="slide-image" />
-      <h1>Happy Birthday 🎉</h1>
       <div class="glitter-container"></div>
       <div class="butterfly-container"></div>
     </section>
-
-    <!-- Other slides remain unchanged -->
-    <!-- SLIDES OMITTED HERE FOR BREVITY -->
+    <!-- other slides remain unchanged -->
   </div>
   <button id="nextBtn">Next</button>
 </div>
@@ -272,9 +259,10 @@
   });
 
   const openBtn = document.getElementById('openBtn');
-  const hiddenImage = document.getElementById('hiddenImage');
+  const revealedImg = document.getElementById('revealedImg');
+
   openBtn.addEventListener('click', () => {
-    hiddenImage.style.display = 'block';
+    revealedImg.style.display = 'block';
   });
 </script>
 </body>
